@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -17,24 +16,66 @@ class _InputPageState extends State<InputPage> {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-          "Form Area",
-          /*Theme.of(context).primaryColor.toString(),*/
-          /*style: TextStyle(fontSize: 25),*/
-        ),
+      body: Column(
+          children: <Widget>[
+
+            Expanded(
+              flex: 1,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: MyContainer(),
+                  ),  Expanded(
+                    flex: 1,
+                    child: MyContainer(),
+                  ),
+                ],
+              ),
+
+            ),  Expanded(
+              flex: 1,
+              child: MyContainer(),
+            ),Expanded(
+              flex: 1,
+              child: MyContainer(),
+            ),Expanded(
+              flex: 1,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: MyContainer(renk: Colors.red),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: MyContainer(renk: Colors.yellow,),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
       ),
-      floatingActionButton:
-      /*Theme(
-        data: ThemeData(
-          //yukarı doğru çıktığında ilk karşılaştıgın temayı al
-          accentColor: Theme.of(context).primaryColor,
-        ),                                            */
-      FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
+
       //  ),
+    );
+  }
+}
+
+class MyContainer extends StatelessWidget {
+  final Color renk;
+  MyContainer({this.renk:Colors.white});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+      margin: EdgeInsets.all(10),
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: renk
+      ),
     );
   }
 }

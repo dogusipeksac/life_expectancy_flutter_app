@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.red,
         scaffoldBackgroundColor: Colors.black,
       ),   */
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.lightBlue,
+
+      ),
       home: InputPage(),
     );
   }
