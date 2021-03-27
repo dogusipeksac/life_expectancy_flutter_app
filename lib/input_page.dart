@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'MyContainer.dart';
+import 'GenderFuct.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -70,41 +71,6 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class GenderFuct extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  GenderFuct({this.icon,this.text});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
 
-      children: <Widget>[
-        Icon(
-          icon,
-          size: 40,
-          color: Colors.black54,),
-        SizedBox(height: 10,),
-        Text(
-         text,
-          style: TextStyle(fontSize: 20,color: Colors.black54,fontWeight:FontWeight.bold),
-        ),
-      ],
-    );
-  }
-}
 
-class MyContainer extends StatelessWidget {
-  final Color renk;
-  final Widget child;
-  MyContainer({this.renk: Colors.white, this.child});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: child,
-      margin: EdgeInsets.all(10),
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: renk),
-    );
-  }
-}
+
