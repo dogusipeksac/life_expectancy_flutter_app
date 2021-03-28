@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'MyContainer.dart';
-import 'GenderFuct.dart';
+import 'mycontainer.dart';
+import 'genderfuct.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -9,6 +9,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  String seciliButton;
+  double icilenSigara=0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +22,7 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             flex: 1,
@@ -42,7 +45,39 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             flex: 1,
-            child: MyContainer(),
+            child: MyContainer(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Günde kaç sigara içiyorsunuz?",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "${icilenSigara.toInt()}",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.lightBlue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Slider(
+                    min: 0,
+                    max: 50,
+                    value: icilenSigara,
+                    onChanged:(double newValue){
+                    setState(() {
+                      icilenSigara=newValue;
+                    });
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
           Expanded(
             flex: 1,
@@ -51,13 +86,35 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   flex: 1,
                   child: MyContainer(
-                    child: GenderFuct(icon: FontAwesomeIcons.venus,text: "KADIN",),
+                    onPressed: () {
+                      setState(() {
+                        seciliButton = 'KADIN';
+                      });
+                    },
+                    renk: seciliButton == 'KADIN'
+                        ? Colors.lightBlue[100]
+                        : Colors.white,
+                    child: GenderFuct(
+                      icon: FontAwesomeIcons.venus,
+                      text: "KADIN",
+                    ),
                   ),
                 ),
                 Expanded(
                   flex: 1,
                   child: MyContainer(
-                    child: GenderFuct(icon: FontAwesomeIcons.mars,text: "ERKEK",),
+                    onPressed: () {
+                      setState(() {
+                        seciliButton = 'ERKEK';
+                      });
+                    },
+                    renk: seciliButton == 'ERKEK'
+                        ? Colors.lightBlue[100]
+                        : Colors.white,
+                    child: GenderFuct(
+                      icon: FontAwesomeIcons.mars,
+                      text: "ERKEK",
+                    ),
                   ),
                 ),
               ],
@@ -70,7 +127,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-
-
-
