@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'constants.dart';
 import 'mycontainer.dart';
 import 'genderfuct.dart';
 
@@ -9,8 +11,12 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  String seciliButton;
-  double icilenSigara=0.0;
+  String selectedButton;
+  double numberOfCigarettes = 0.0;
+  double numberOfExercises = 0.0;
+  int humanSize = 170;
+  int humanKilo=60;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,18 +36,126 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: MyContainer(),
+                  child: MyContainer(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        //çok güzel birşey unutma bunu rotatedbox
+                        RotatedBox(
+                            quarterTurns: 3,
+                            child: Text(
+                              "SIZE",
+                              style: textStyle,
+                            )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        RotatedBox(
+                            quarterTurns: 3,
+                            child: Text(
+                              humanSize.toString(),
+                              style: numberStyle,
+                            )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ButtonTheme(
+                              minWidth: 36,
+                              height: 36,
+                              // ignore: deprecated_member_use
+                              child: OutlineButton(
+                                borderSide: BorderSide(color: Colors.lightBlue,width: 1),
+                                child: Icon(
+                                  FontAwesomeIcons.plus,
+                                  size: 10,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                            // ignore: deprecated_member_use
+                            ButtonTheme(
+                              minWidth: 36,
+                              height: 36,
+                              child: OutlineButton(
+                                borderSide: BorderSide(color: Colors.lightBlue,width: 1),
+                                onPressed: () {},
+                                child: Icon(
+                                  FontAwesomeIcons.minus,
+                                  size: 10,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
                   flex: 1,
-                  child: MyContainer(),
+                  child: MyContainer(
+                    child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      //çok güzel birşey unutma bunu rotatedbox
+                      RotatedBox(
+                          quarterTurns: 3,
+                          child: Text(
+                            "KILO(KG)",
+                            style: textStyle,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      RotatedBox(
+                          quarterTurns: 3,
+                          child: Text(
+                            humanKilo.toString(),
+                            style: numberStyle,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ButtonTheme(
+                            minWidth: 36,
+                            height: 36,
+                            // ignore: deprecated_member_use
+                            child: OutlineButton(
+                              borderSide: BorderSide(color: Colors.lightBlue,width: 1),
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                size: 10,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                          // ignore: deprecated_member_use
+                          ButtonTheme(
+                            minWidth: 36,
+                            height: 36,
+                            child: OutlineButton(
+                              borderSide: BorderSide(color: Colors.lightBlue,width: 1),
+                              onPressed: () {},
+                              child: Icon(
+                                FontAwesomeIcons.minus,
+                                size: 10,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  ),
                 ),
               ],
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: MyContainer(),
           ),
           Expanded(
             flex: 1,
@@ -50,29 +164,50 @@ class _InputPageState extends State<InputPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Günde kaç sigara içiyorsunuz?",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    "How many times a week do you exercise?",
+                    style: textStyle,
                   ),
                   Text(
-                    "${icilenSigara.toInt()}",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.lightBlue,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    "${numberOfExercises.toInt()}",
+                    style: numberStyle,
+                  ),
+                  Slider(
+                    min: 0,
+                    max: 7,
+                    value: numberOfExercises,
+                    divisions: 7,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        numberOfExercises = newValue;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: MyContainer(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "How many cigarettes do you smoke a day?",
+                    style: textStyle,
+                  ),
+                  Text(
+                    "${numberOfCigarettes.toInt()}",
+                    style: numberStyle,
                   ),
                   Slider(
                     min: 0,
                     max: 50,
-                    value: icilenSigara,
-                    onChanged:(double newValue){
-                    setState(() {
-                      icilenSigara=newValue;
-                    });
+                    value: numberOfCigarettes,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        numberOfCigarettes = newValue;
+                      });
                     },
                   ),
                 ],
@@ -88,15 +223,15 @@ class _InputPageState extends State<InputPage> {
                   child: MyContainer(
                     onPressed: () {
                       setState(() {
-                        seciliButton = 'KADIN';
+                        selectedButton = 'FEMALE';
                       });
                     },
-                    renk: seciliButton == 'KADIN'
+                    color: selectedButton == 'FEMALE'
                         ? Colors.lightBlue[100]
                         : Colors.white,
                     child: GenderFuct(
                       icon: FontAwesomeIcons.venus,
-                      text: "KADIN",
+                      text: "FEMALE",
                     ),
                   ),
                 ),
@@ -105,15 +240,15 @@ class _InputPageState extends State<InputPage> {
                   child: MyContainer(
                     onPressed: () {
                       setState(() {
-                        seciliButton = 'ERKEK';
+                        selectedButton = 'MALE';
                       });
                     },
-                    renk: seciliButton == 'ERKEK'
+                    color: selectedButton == 'MALE'
                         ? Colors.lightBlue[100]
                         : Colors.white,
                     child: GenderFuct(
                       icon: FontAwesomeIcons.mars,
-                      text: "ERKEK",
+                      text: "MALE",
                     ),
                   ),
                 ),

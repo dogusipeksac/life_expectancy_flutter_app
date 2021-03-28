@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 class GenderFuct extends StatelessWidget {
   final IconData icon;
   final String text;
@@ -19,8 +21,7 @@ class GenderFuct extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(
-              fontSize: 20, color: Colors.black54, fontWeight: FontWeight.bold),
+          style:textStyle,
         ),
       ],
     );
