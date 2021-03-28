@@ -37,121 +37,13 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   flex: 1,
                   child: MyContainer(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        //çok güzel birşey unutma bunu rotatedbox
-                        RotatedBox(
-                            quarterTurns: 3,
-                            child: Text(
-                              "SIZE",
-                              style: textStyle,
-                            )),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        RotatedBox(
-                            quarterTurns: 3,
-                            child: Text(
-                              humanSize.toString(),
-                              style: numberStyle,
-                            )),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            ButtonTheme(
-                              minWidth: 36,
-                              height: 36,
-                              // ignore: deprecated_member_use
-                              child: OutlineButton(
-                                borderSide: BorderSide(color: Colors.lightBlue,width: 1),
-                                child: Icon(
-                                  FontAwesomeIcons.plus,
-                                  size: 10,
-                                ),
-                                onPressed: () {},
-                              ),
-                            ),
-                            // ignore: deprecated_member_use
-                            ButtonTheme(
-                              minWidth: 36,
-                              height: 36,
-                              child: OutlineButton(
-                                borderSide: BorderSide(color: Colors.lightBlue,width: 1),
-                                onPressed: () {},
-                                child: Icon(
-                                  FontAwesomeIcons.minus,
-                                  size: 10,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                    child: buildRowOutLineButton('SIZE'),
                   ),
                 ),
                 Expanded(
                   flex: 1,
                   child: MyContainer(
-                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      //çok güzel birşey unutma bunu rotatedbox
-                      RotatedBox(
-                          quarterTurns: 3,
-                          child: Text(
-                            "KILO(KG)",
-                            style: textStyle,
-                          )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      RotatedBox(
-                          quarterTurns: 3,
-                          child: Text(
-                            humanKilo.toString(),
-                            style: numberStyle,
-                          )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ButtonTheme(
-                            minWidth: 36,
-                            height: 36,
-                            // ignore: deprecated_member_use
-                            child: OutlineButton(
-                              borderSide: BorderSide(color: Colors.lightBlue,width: 1),
-                              child: Icon(
-                                FontAwesomeIcons.plus,
-                                size: 10,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ),
-                          // ignore: deprecated_member_use
-                          ButtonTheme(
-                            minWidth: 36,
-                            height: 36,
-                            child: OutlineButton(
-                              borderSide: BorderSide(color: Colors.lightBlue,width: 1),
-                              onPressed: () {},
-                              child: Icon(
-                                FontAwesomeIcons.minus,
-                                size: 10,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    child: buildRowOutLineButton('KILO'),
                   ),
                 ),
               ],
@@ -260,5 +152,74 @@ class _InputPageState extends State<InputPage> {
 
       //  ),
     );
+  }
+
+  Row buildRowOutLineButton(String text) {
+
+    return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      //çok güzel birşey unutma bunu rotatedbox
+                      RotatedBox(
+                          quarterTurns: 3,
+                          child: Text(
+                            text,
+                            style: textStyle,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      RotatedBox(
+                          quarterTurns: 3,
+                          child: Text(
+                            text=='SIZE'?humanSize.toString():humanKilo.toString(),
+                            style: numberStyle,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ButtonTheme(
+                            minWidth: 36,
+                            height: 36,
+                            // ignore: deprecated_member_use
+                            child: OutlineButton(
+
+                              borderSide: BorderSide(color: Colors.lightBlue,width: 1),
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                size: 10,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  text=='SIZE'?humanSize++:humanKilo++;
+
+                                });
+                              },
+                            ),
+                          ),
+                          // ignore: deprecated_member_use
+                          ButtonTheme(
+                            minWidth: 36,
+                            height: 36,
+                            child: OutlineButton(
+                              borderSide: BorderSide(color: Colors.lightBlue,width: 1),
+                              onPressed: () {
+                                setState(() {
+                                  text=='SIZE'?humanSize--:humanKilo--;
+                                });
+                              },
+                              child: Icon(
+                                FontAwesomeIcons.minus,
+                                size: 10,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
   }
 }
