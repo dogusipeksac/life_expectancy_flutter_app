@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:life_expectancy_flutter_app/user_data.dart';
 import 'constants.dart';
 import 'mycontainer.dart';
 import 'genderfuct.dart';
+import 'result_page.dart';
+import 'user_data.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -146,6 +149,25 @@ class _InputPageState extends State<InputPage> {
                 ),
               ],
             ),
+          ),
+          ButtonTheme(
+            height: 50,
+            child: FlatButton(
+              color: Colors.white,
+              child: Text("CALCULATE",style: textStyle,),
+                onPressed:(){
+                  Navigator.push(context, MaterialPageRoute(builder:(context)=>ResultPage(
+                    UserData(
+                      humanKilo: humanKilo,
+                      humanSize: humanSize,
+                      numberOfCigarettes: numberOfCigarettes,
+                      numberOfExercises: numberOfExercises,
+                    ),
+
+                  )));
+
+                }
+                ),
           ),
         ],
       ),
